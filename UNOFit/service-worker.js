@@ -1,83 +1,99 @@
-/* ==================================================
-   UNOFit — Service Worker
-   Cache básico seguro (PWA)
-================================================== */
+/*
+UNOFit — Service Worker (PWA)
+Dirección General: Hugo González Nápoles
+© 2026 UNOFit. Todos los derechos reservados.
+Cache seguro, controlado y vendible.
+*/
 
-const CACHE_NAME = "unofit-v1";
+const CACHE_NAME = "unofit-cache-v3";
 
+/* =========================
+   ARCHIVOS A CACHEAR
+========================= */
 const ASSETS = [
   "./",
   "./index.html",
   "./app.css",
   "./app.js",
   "./manifest.json",
+  "./unofit-logo.png",
   "./icon-192.png",
   "./icon-512.png"
 ];
 
 /* =========================
-   INSTALACIÓN
+   INSTALL
 ========================= */
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(ASSETS);
+    })
   );
   self.skipWaiting();
 });
 
 /* =========================
-   ACTIVACIÓN
+   ACTIVATE
 ========================= */
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
+    caches.keys().then(keys => {
+      return Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
             return caches.delete(key);
           }
         })
-      )
-    )
+      );
+    })
   );
   self.clients.claim();
 });
 
 /* =========================
-   FETCH (ESTRATEGIA SEGURA)
+   FETCH
 ========================= */
 self.addEventListener("fetch", event => {
   const req = event.request;
 
-  // Solo manejamos GET
+  // Solo GET
   if (req.method !== "GET") return;
 
-  // No cachear llamadas externas sensibles
+  // No cachear servicios externos sensibles
   if (
     req.url.includes("wa.me") ||
-    req.url.includes("mercadopago") ||
-    req.url.includes("stripe")
+    req.url.includes("stripe") ||
+    req.url.includes("mercadopago")
   ) {
     return;
   }
 
-  // Estrategia: Cache First + Network Fallback
   event.respondWith(
-    caches.match(req).then(cacheRes => {
-      if (cacheRes) return cacheRes;
+    caches.match(req).then(cached => {
+      // 1️⃣ Si está en cache, servirlo
+      if (cached) return cached;
 
+      // 2️⃣ Si no, ir a red
       return fetch(req)
-        .then(networkRes => {
+        .then(res => {
           // Cachear solo recursos del mismo origen
-          if (req.url.startsWith(self.location.origin)) {
-            const clone = networkRes.clone();
+          if (
+            res &&
+            res.status === 200 &&
+            req.url.startsWith(self.location.origin)
+          ) {
+            const clone = res.clone();
             caches.open(CACHE_NAME).then(cache => {
               cache.put(req, clone);
             });
           }
-          return networkRes;
+          return res;
         })
-        .catch(() => caches.match("./index.html"));
+        .catch(() => {
+          // 3️⃣ Fallback seguro
+          return caches.match("./index.html");
+        });
     })
   );
 });
