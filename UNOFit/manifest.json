@@ -4,7 +4,7 @@
   "description": "Gestión inteligente para gimnasios. 100% digital.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#b00020",
+  "background_color": "#ffffff",
   "theme_color": "#b00020",
   "orientation": "portrait",
   "lang": "es-MX",
