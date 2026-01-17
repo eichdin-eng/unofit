@@ -1,4 +1,8 @@
-/* ==================================================
+/*
+UNOFit — Sistema interno para gimnasios
+Dirección General y Propietario: Hugo González Nápoles
+© 2026 UNOFit. Todos los derechos reservados.
+*//* ==================================================
    UTILIDADES
 ================================================== */
 const $ = sel => document.querySelector(sel);
@@ -228,3 +232,4 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js");
   });
 }
+
