@@ -1,7 +1,7 @@
 {
   "name": "UNOFit",
   "short_name": "UNOFit",
-  "description": "Gestión inteligente para gimnasios. 100% digital.",
+  "description": "Sistema interno inteligente para gimnasios. 100% digital.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
