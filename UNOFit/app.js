@@ -1,5 +1,5 @@
 /* ==================================================
-   UTILIDADES BÁSICAS
+   UTILIDADES
 ================================================== */
 const $ = sel => document.querySelector(sel);
 const render = html => { $("#app").innerHTML = html; };
@@ -21,15 +21,22 @@ function cerrarSesion(){
 }
 
 /* ==================================================
-   DATOS BASE (DEMO)
+   USUARIOS (LOGIN)
 ================================================== */
-const USUARIOS = [
-  { celular:"5511111111", nip:"1234", rol:"GT", nombre:"Gerente" },
-  { celular:"5522222222", nip:"1234", rol:"EV", nombre:"Ventas" },
-  { celular:"5533333333", nip:"1234", rol:"EP", nombre:"Entrenador" },
-  { celular:"5544444444", nip:"1234", rol:"AN", nombre:"Anfitrión" }
+let USUARIOS = JSON.parse(localStorage.getItem("UNOFit_usuarios")) || [
+  { celular:"6867363304", nip:"1234", rol:"GT", nombre:"Propietario" },
+  { celular:"5511111111", nip:"1234", rol:"EV", nombre:"Ventas" },
+  { celular:"5522222222", nip:"1234", rol:"EP", nombre:"Entrenador" },
+  { celular:"5533333333", nip:"1234", rol:"AN", nombre:"Anfitrión" }
 ];
 
+function guardarUsuarios(){
+  localStorage.setItem("UNOFit_usuarios", JSON.stringify(USUARIOS));
+}
+
+/* ==================================================
+   SOCIOS (CON FOTO)
+================================================== */
 const SOCIOS = [
   {
     clave:"U0F1",
@@ -38,7 +45,7 @@ const SOCIOS = [
     celular:"5510000001",
     estado:"Activo",
     cat:"CAT ACEPTADO",
-    documentos:{ ine:true, admision:true }
+    foto:"https://i.pravatar.cc/150?img=12"
   },
   {
     clave:"U0F2",
@@ -47,7 +54,7 @@ const SOCIOS = [
     celular:"5510000002",
     estado:"No activo",
     cat:"CAT DECLINADO",
-    documentos:{ ine:true, admision:true }
+    foto:"https://i.pravatar.cc/150?img=32"
   }
 ];
 
@@ -58,7 +65,7 @@ function loginVista(){
   ocultarBuscador();
   render(`
     <div class="card">
-      <h3>Acceso UNOFit</h3>
+      <h3>Inicia sesión</h3>
       <input id="cel" placeholder="Celular">
       <input id="nip" type="password" placeholder="NIP">
       <button onclick="login()">Entrar</button>
@@ -70,10 +77,7 @@ function login(){
   const cel = $("#cel").value;
   const nip = $("#nip").value;
   const u = USUARIOS.find(x => x.celular === cel && x.nip === nip);
-  if(!u){
-    alert("Datos incorrectos");
-    return;
-  }
+  if(!u){ alert("Datos incorrectos"); return; }
   guardarSesion(u);
   homePorRol(u);
 }
@@ -81,21 +85,12 @@ function login(){
 /* ==================================================
    BARRA SUPERIOR
 ================================================== */
-function mostrarBuscador(){
-  const q = $("#q");
-  if(q) q.style.display = "block";
-}
-function ocultarBuscador(){
-  const q = $("#q");
-  if(q) q.style.display = "none";
-}
-function limpiarBuscador(){
-  const q = $("#q");
-  if(q) q.value = "";
-}
+function mostrarBuscador(){ const q=$("#q"); if(q) q.style.display="block"; }
+function ocultarBuscador(){ const q=$("#q"); if(q) q.style.display="none"; }
+function limpiarBuscador(){ const q=$("#q"); if(q) q.value=""; }
 
 /* ==================================================
-   ENRUTADOR POR ROL
+   HOME POR ROL
 ================================================== */
 function homePorRol(u){
   mostrarBuscador();
@@ -107,14 +102,13 @@ function homePorRol(u){
 }
 
 /* ==================================================
-   BUSCADOR (CLAVE / CELULAR / APELLIDO)
+   BUSCADOR
 ================================================== */
 const buscador = $("#q");
 if(buscador){
   buscador.addEventListener("input", e=>{
     const v = e.target.value.trim().toUpperCase();
-    if(!v) return;
-
+    if(!v){ homePorRol(obtenerSesion()); return; }
     const res = SOCIOS.filter(s =>
       s.clave === v ||
       s.celular === v ||
@@ -129,16 +123,17 @@ function renderResultados(lista){
     render("<div class='card'>Sin resultados</div>");
     return;
   }
-  render(lista.map(s=>cardSocio(s)).join(""));
+  render(lista.map(cardSocio).join(""));
 }
 
 /* ==================================================
-   VISTAS POR ROL
+   VISTAS
 ================================================== */
 function vistaGT(u){
   render(`
     <div class="card">
-      <strong>Gerente</strong><br>${u.nombre}
+      <strong>Propietario</strong><br>${u.nombre}
+      <button onclick="formAgregarUsuario()">➕ Agregar usuario</button>
       <button onclick="cerrarSesion()">Cerrar sesión</button>
     </div>
     ${SOCIOS.map(cardSocio).join("")}
@@ -146,143 +141,90 @@ function vistaGT(u){
 }
 
 function vistaEV(u){
-  render(`
-    <div class="card">
-      <strong>Ventas</strong><br>${u.nombre}
-      <button onclick="cerrarSesion()">Cerrar sesión</button>
-    </div>
-    ${SOCIOS.map(cardSocio).join("")}
-  `);
+  render(`<div class="card"><strong>Ventas</strong><br>${u.nombre}
+    <button onclick="cerrarSesion()">Cerrar sesión</button></div>
+    ${SOCIOS.map(cardSocio).join("")}`);
 }
 
 function vistaEP(u){
-  render(`
-    <div class="card">
-      <strong>Entrenador</strong><br>${u.nombre}
-      <button onclick="cerrarSesion()">Cerrar sesión</button>
-    </div>
-    ${SOCIOS.map(cardSocio).join("")}
-  `);
+  render(`<div class="card"><strong>Entrenador</strong><br>${u.nombre}
+    <button onclick="cerrarSesion()">Cerrar sesión</button></div>
+    ${SOCIOS.map(cardSocio).join("")}`);
 }
 
 function vistaAN(u){
-  render(`
-    <div class="card">
-      <strong>Anfitrión</strong><br>${u.nombre}
-      <button onclick="cerrarSesion()">Cerrar sesión</button>
-    </div>
-    ${SOCIOS.map(cardSocio).join("")}
-  `);
+  render(`<div class="card"><strong>Anfitrión</strong><br>${u.nombre}
+    <button onclick="cerrarSesion()">Cerrar sesión</button></div>
+    ${SOCIOS.map(cardSocio).join("")}`);
 }
 
 /* ==================================================
-   PERFIL SOCIO
+   AGREGAR USUARIO (SOLO GT)
+================================================== */
+function formAgregarUsuario(){
+  render(`
+    <div class="card">
+      <h3>Agregar usuario</h3>
+      <input id="nNombre" placeholder="Nombre">
+      <input id="nCel" placeholder="Celular">
+      <select id="nRol">
+        <option value="GT">Gerente</option>
+        <option value="EV">Ventas</option>
+        <option value="EP">Entrenador</option>
+        <option value="AN">Anfitrión</option>
+      </select>
+      <button onclick="guardarNuevoUsuario()">Guardar</button>
+      <button onclick="homePorRol(obtenerSesion())">Cancelar</button>
+    </div>
+  `);
+}
+
+function guardarNuevoUsuario(){
+  const u={
+    nombre:$("#nNombre").value,
+    celular:$("#nCel").value,
+    nip:"1234",
+    rol:$("#nRol").value
+  };
+  if(!u.nombre||!u.celular){ alert("Datos incompletos"); return; }
+  USUARIOS.push(u);
+  guardarUsuarios();
+  alert("Usuario agregado");
+  homePorRol(obtenerSesion());
+}
+
+/* ==================================================
+   CARD SOCIO
 ================================================== */
 function cardSocio(s){
   return `
   <div class="card">
+    <img src="${s.foto}" style="width:72px;border-radius:50%">
     <strong>${s.nombre} ${s.apellido}</strong><br>
     Clave: ${s.clave}<br>
     Estado: ${s.estado}<br>
     CAT: ${s.cat}
-
     <div class="acciones">
-      ${btnWhatsApp("CAT",s)}
-      ${btnCorreo("CAT",s)}
-      ${btnDescargar("CAT",s)}
-    </div>
-
-    <div class="acciones">
-      ${btnWhatsApp("INE",s)}
-      ${btnCorreo("INE",s)}
-      ${btnDescargar("INE",s)}
-    </div>
-
-    <div class="acciones">
-      ${btnWhatsApp("ADMISION",s)}
-      ${btnCorreo("ADMISION",s)}
-      ${btnDescargar("ADMISION",s)}
+      <button onclick="wa('${s.celular}')">💬 WhatsApp</button>
     </div>
   </div>`;
 }
 
-/* ==================================================
-   BOTONES DOCUMENTOS
-================================================== */
-function puedeDescargar(){
-  const s = obtenerSesion();
-  return s && (s.rol==="GT" || s.rol==="AN");
-}
-
-function btnWhatsApp(tipo,s){
-  return `<button onclick="enviarWhatsApp('${tipo}','${s.celular}')">💬</button>`;
-}
-function btnCorreo(tipo,s){
-  return `<button onclick="enviarCorreo('${tipo}','${s.celular}')">✉️</button>`;
-}
-function btnDescargar(tipo,s){
-  if(!puedeDescargar()) return "";
-  return `<button onclick="descargarDoc('${tipo}','${s.celular}')">⬇️</button>`;
+function wa(cel){
+  window.open(`https://wa.me/52${cel}`);
 }
 
 /* ==================================================
-   ACCIONES DOCUMENTOS
-================================================== */
-function enviarWhatsApp(tipo,cel){
-  const msg = `Te comparto tu ${tipo} UNOFit.`;
-  window.open(`https://wa.me/52${cel}?text=${encodeURIComponent(msg)}`);
-}
-
-function enviarCorreo(tipo,cel){
-  alert(`Correo enviado con ${tipo} a ${cel}`);
-}
-
-function descargarDoc(tipo,cel){
-  alert(`Descargando ${tipo} para auditoría (${cel})`);
-}
-
-/* ==================================================
-   INICIO
+   INIT
 ================================================== */
 const sesion = obtenerSesion();
 sesion ? homePorRol(sesion) : loginVista();
 
+/* ==================================================
+   SERVICE WORKER
+================================================== */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .then(() => console.log("Service Worker UNOFit activo"))
-      .catch(err => console.error("SW error", err));
+    navigator.serviceWorker.register("./service-worker.js");
   });
 }
-
-/* ==================================================
-   ESTADO DE CONEXIÓN
-================================================== */
-function mostrarEstadoConexion(){
-  const offlineMsg = document.createElement("div");
-  offlineMsg.id = "offlineMsg";
-  offlineMsg.style.position = "fixed";
-  offlineMsg.style.bottom = "16px";
-  offlineMsg.style.left = "50%";
-  offlineMsg.style.transform = "translateX(-50%)";
-  offlineMsg.style.background = "#111";
-  offlineMsg.style.color = "#fff";
-  offlineMsg.style.padding = "10px 16px";
-  offlineMsg.style.borderRadius = "999px";
-  offlineMsg.style.fontSize = "13px";
-  offlineMsg.style.zIndex = "999";
-  offlineMsg.style.display = "none";
-  offlineMsg.innerText = "Sin conexión. Algunas funciones están limitadas.";
-
-  document.body.appendChild(offlineMsg);
-
-  function actualizar(){
-    offlineMsg.style.display = navigator.onLine ? "none" : "block";
-  }
-
-  window.addEventListener("online", actualizar);
-  window.addEventListener("offline", actualizar);
-  actualizar();
-}
-
-window.addEventListener("load", mostrarEstadoConexion);
