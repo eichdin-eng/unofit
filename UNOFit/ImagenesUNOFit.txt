@@ -1,0 +1,107 @@
+==================================================
+UNOFit — CONTROL DE IMÁGENES (OFICIAL)
+==================================================
+
+OBJETIVO
+Mantener coherencia visual, calidad alta y cero errores
+en todos los usos de imagen dentro del ecosistema UNOFit
+(app, PWA, marketing, documentos).
+
+--------------------------------------------------
+1) IDENTIDAD OFICIAL (NO MODIFICAR)
+--------------------------------------------------
+
+ARCHIVO MAESTRO:
+- unofit-brand.svg
+- Fondo: BLANCO
+- Colores: Dorado oficial (F2D36B / D4AF37)
+- Proporción: 16:9 (1600x900)
+- Tipografía incrustada (SVG)
+
+REGLAS:
+- Prohibido cambiar colores
+- Prohibido estirar o deformar
+- Prohibido recortar el logo
+- Prohibido agregar sombras o efectos externos
+
+--------------------------------------------------
+2) VERSIONES DE USO PERMITIDAS
+--------------------------------------------------
+
+PNG ALTA:
+- Nombre: UNOFit_Phi_Alta.png
+- Resolución: 6400 x 3600
+- Uso: fondos web, PWA, splash, presentaciones
+
+JPG ALTA:
+- Nombre: UNOFit_Phi_Alta.jpg
+- Calidad: 95
+- Uso: documentos, marketing, presentaciones
+
+SVG:
+- Uso: background CSS, escalado infinito, impresión
+
+--------------------------------------------------
+3) ICONOS PWA / APP
+--------------------------------------------------
+
+FORMATOS:
+- icon-192.png
+- icon-192-maskable.png
+- icon-512.png
+- icon-512-maskable.png
+
+REGLAS:
+- Fondo limpio
+- Logo centrado
+- Margen de seguridad (maskable)
+- Sin texto adicional
+
+--------------------------------------------------
+4) USO EN LA APP (CSS)
+--------------------------------------------------
+
+REGLA:
+- Las imágenes NO se insertan como <img> decorativo
+- Se usan como background-image cuando aplique
+
+EJEMPLO:
+background-image: url("unofit-brand.svg");
+background-repeat: no-repeat;
+background-position: center;
+background-size: contain;
+
+--------------------------------------------------
+5) USO PROHIBIDO
+--------------------------------------------------
+
+- Capturas borrosas
+- Screenshots redimensionados
+- Logos en baja resolución
+- Fondos con colores no oficiales
+- Mezclar versiones antiguas
+
+--------------------------------------------------
+6) NOMENCLATURA OBLIGATORIA
+--------------------------------------------------
+
+unofit-brand.svg
+UNOFit_Phi_Alta.png
+UNOFit_Phi_Alta.jpg
+icon-192.png
+icon-192-maskable.png
+icon-512.png
+icon-512-maskable.png
+
+--------------------------------------------------
+7) NOTA FINAL
+--------------------------------------------------
+
+Si una imagen:
+- No está aquí
+- No cumple estas reglas
+ENTONCES NO SE USA.
+
+==================================================
+FIN DEL DOCUMENTO
+==================================================

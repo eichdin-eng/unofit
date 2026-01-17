@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UNOFit</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="app.css" />
+
+  <!-- Iconos (ligeros y universales) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..."
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+  <!-- =========================
+       BARRA SUPERIOR (FIJA)
+       ========================= -->
+  <header id="topbar">
+    <div class="top-left">
+      <strong class="logo">UNOFit</strong>
+    </div>
+
+    <div class="top-center">
+      <!-- Buscador: app.js decide cuándo mostrarlo -->
+      <input
+        id="q"
+        type="search"
+        placeholder="Buscar por clave, celular o apellido"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="top-right">
+      <!-- Campanita -->
+      <button id="btnNotificaciones" class="icon-btn" title="Notificaciones">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+
+      <!-- WhatsApp -->
+      <button id="btnWhatsApp" class="icon-btn" title="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </button>
+
+      <!-- Perfil -->
+      <button id="btnPerfil" class="icon-btn" title="Perfil">
+        <i class="fa-solid fa-user"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================
+       CONTENIDO PRINCIPAL
+       ========================= -->
+  <main id="app"></main>
+
+  <!-- =========================
+       MODALES LIGEROS
+       (se usan desde app.js)
+       ========================= -->
+
+  <!-- Modal mensajes WhatsApp -->
+  <div id="modalMensajes" class="modal hidden">
+    <div class="modal-content">
+      <h3>Mensaje</h3>
+      <div id="listaMensajes"></div>
+      <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal vista documento -->
+  <div id="modalDocumento" class="modal hidden">
+    <div class="modal-content">
+      <div id="documentoVista"></div>
+      <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- =========================
+       MENSAJE INSTITUCIONAL
+       ========================= -->
+  <footer id="eco">
+    <small>UNOFit es 100% digital. Cuidamos el planeta.</small>
+  </footer>
+
+  <!-- =========================
+       LÓGICA
+       ========================= -->
+  <script src="app.js"></script>
+
+</body>
+</html>
+<img 
+  src="unofit-brand.svg"
+  alt="UNOFit"
+  style="width:100%; max-width:520px; display:block; margin:20px auto;"
+>

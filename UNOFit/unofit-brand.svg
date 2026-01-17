@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900"
+  xmlns="http://www.w3.org/2000/svg">
+
+  <!-- FONDO NEGRO -->
+  <rect width="100%" height="100%" fill="#000000"/>
+
+  <!-- DESTELLOS TENUES -->
+  <g fill="#F2D36B" opacity="0.08">
+    <circle cx="200" cy="180" r="2"/>
+    <circle cx="420" cy="260" r="1.5"/>
+    <circle cx="680" cy="190" r="2"/>
+    <circle cx="980" cy="240" r="1.5"/>
+    <circle cx="1200" cy="200" r="2"/>
+    <circle cx="300" cy="520" r="1.5"/>
+    <circle cx="560" cy="610" r="2"/>
+    <circle cx="860" cy="560" r="1.5"/>
+    <circle cx="1120" cy="600" r="2"/>
+    <circle cx="1380" cy="540" r="1.5"/>
+  </g>
+
+  <!-- PESA DORADA (ICONO CENTRAL SUPERIOR) -->
+  <g transform="translate(800 340)" fill="#F2D36B">
+    <rect x="-70" y="-10" width="140" height="20" rx="6"/>
+    <rect x="-110" y="-26" width="30" height="52" rx="6"/>
+    <rect x="80" y="-26" width="30" height="52" rx="6"/>
+  </g>
+
+  <!-- TEXTO UNOFit -->
+  <text x="800" y="480"
+    text-anchor="middle"
+    fill="#D4AF37"
+    font-size="92"
+    font-weight="700"
+    font-family="Arial, Helvetica, sans-serif">
+    UNOFit<tspan font-size="36" dy="-38">®</tspan>
+  </text>
+
+  <!-- SLOGAN -->
+  <text x="800" y="545"
+    text-anchor="middle"
+    fill="#F2D36B"
+    font-size="34"
+    font-family="Arial, Helvetica, sans-serif"
+    opacity="0.95">
+    Menos caos. Más ingresos.
+  </text>
+
+</svg>
