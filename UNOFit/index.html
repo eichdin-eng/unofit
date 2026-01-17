@@ -12,10 +12,12 @@
   <link rel="stylesheet" href="app.css" />
 
   <!-- Iconos -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 
 <body>
@@ -24,42 +26,57 @@
        BARRA SUPERIOR
        ========================= -->
   <header id="topbar">
+
+    <!-- LOGO DORADO (HEADER) -->
     <div class="top-left">
-      <img src="UNOFit_Phi_Alta.png" alt="UNOFit" class="logo-icon">
+      <img src="unofit-logo.png" alt="UNOFit" class="logo-icon">
     </div>
 
+    <!-- BUSCADOR (SOLO LUPA, app.js LO CONTROLA) -->
     <div class="top-center">
-      <input
-        id="q"
-        type="search"
-        placeholder="Buscar por clave, celular o apellido"
-        autocomplete="off"
-      />
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          id="q"
+          type="search"
+          placeholder="Clave, celular o apellidos"
+          autocomplete="off"
+        />
+      </div>
     </div>
 
+    <!-- ICONOS DERECHA -->
     <div class="top-right">
-      <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
-      <button class="icon-btn"><i class="fa-brands fa-whatsapp"></i></button>
-      <button class="icon-btn"><i class="fa-solid fa-user"></i></button>
+      <button class="icon-btn" title="Notificaciones">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="icon-btn" title="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </button>
+      <button class="icon-btn" title="Perfil">
+        <i class="fa-solid fa-user"></i>
+      </button>
     </div>
+
   </header>
 
   <!-- =========================
-       CONTENIDO
+       CONTENIDO PRINCIPAL
        ========================= -->
   <main id="app">
-    <img src="UNOFit_Phi_Alta.png" class="logo-central" alt="UNOFit">
+    <!-- LOGO CENTRAL (SIN FONDO NEGRO, SOLO DORADO) -->
+    <img src="unofit-logo.png" class="logo-central" alt="UNOFit">
   </main>
 
   <!-- =========================
-       FOOTER
+       FOOTER INSTITUCIONAL
        ========================= -->
   <footer id="eco">
     <small>UNOFit es 100% digital. Cuidamos el planeta.</small>
   </footer>
 
   <!-- =========================
-       JS
+       LÓGICA
        ========================= -->
   <script src="app.js"></script>
 
