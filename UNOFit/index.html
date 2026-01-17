@@ -11,10 +11,9 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="app.css" />
 
-  <!-- Iconos (ligeros y universales) -->
+  <!-- Iconos -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-..."
         crossorigin="anonymous"
         referrerpolicy="no-referrer" />
 </head>
@@ -22,14 +21,14 @@
 <body>
 
   <!-- =========================
-       BARRA SUPERIOR (FIJA)
+       BARRA SUPERIOR
        ========================= -->
   <header id="topbar">
     <div class="top-left">
-     <img src="unofit-dorado.svg" alt="UNOFit" class="logo-icon">
+      <img src="UNOFit_Phi_Alta.png" alt="UNOFit" class="logo-icon">
+    </div>
 
     <div class="top-center">
-      <!-- Buscador: app.js decide cuándo mostrarlo -->
       <input
         id="q"
         type="search"
@@ -39,61 +38,30 @@
     </div>
 
     <div class="top-right">
-      <!-- Campanita -->
-      <button id="btnNotificaciones" class="icon-btn" title="Notificaciones">
-        <i class="fa-solid fa-bell"></i>
-      </button>
-
-      <!-- WhatsApp -->
-      <button id="btnWhatsApp" class="icon-btn" title="WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-      </button>
-
-      <!-- Perfil -->
-      <button id="btnPerfil" class="icon-btn" title="Perfil">
-        <i class="fa-solid fa-user"></i>
-      </button>
+      <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
+      <button class="icon-btn"><i class="fa-brands fa-whatsapp"></i></button>
+      <button class="icon-btn"><i class="fa-solid fa-user"></i></button>
     </div>
   </header>
 
   <!-- =========================
-       CONTENIDO PRINCIPAL
+       CONTENIDO
        ========================= -->
-  <main id="app"></main>
+  <main id="app">
+    <img src="UNOFit_Phi_Alta.png" class="logo-central" alt="UNOFit">
+  </main>
 
   <!-- =========================
-       MODALES LIGEROS
-       (se usan desde app.js)
+       FOOTER
        ========================= -->
-
-  <!-- Modal mensajes WhatsApp -->
-  <div id="modalMensajes" class="modal hidden">
-    <div class="modal-content">
-      <h3>Mensaje</h3>
-      <div id="listaMensajes"></div>
-      <button onclick="cerrarModal()">Cerrar</button>
-    </div>
-  </div>
-
-  <!-- Modal vista documento -->
-  <div id="modalDocumento" class="modal hidden">
-    <div class="modal-content">
-      <div id="documentoVista"></div>
-      <button onclick="cerrarModal()">Cerrar</button>
-    </div>
-  </div>
+  <footer id="eco">
+    <small>UNOFit es 100% digital. Cuidamos el planeta.</small>
+  </footer>
 
   <!-- =========================
-       MENSAJE INSTITUCIONAL
-       ========================= -->
-<footer id="eco">
-  <small>UNOFit es 100% digital. Cuidamos el planeta.</small>
-</footer>
-  <!-- =========================
-       LÓGICA
+       JS
        ========================= -->
   <script src="app.js"></script>
 
 </body>
 </html>
-<img src="unofit-dorado.svg" class="logo-central" alt="UNOFit">
