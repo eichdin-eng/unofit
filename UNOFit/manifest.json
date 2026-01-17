@@ -1,4 +1,4 @@
-{
+"description": "Sistema interno inteligente para gimnasios. Dirección General: Hugo González Nápoles."{
   "name": "UNOFit",
   "short_name": "UNOFit",
   "description": "Sistema interno inteligente para gimnasios. 100% digital.",
@@ -21,3 +21,4 @@
     }
   ]
 }
+
