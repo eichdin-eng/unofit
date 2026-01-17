@@ -188,4 +188,42 @@ button{
   #topbar input[type="search"]{
     width: 150px;
   }
+
+}/* =========================
+   LOGO HEADER (DORADO)
+========================= */
+.logo-icon{
+  height:28px;
+  width:auto;
+}
+
+/* =========================
+   LOGO CENTRAL (DORADO)
+========================= */
+.logo-central{
+  display:block;
+  margin:64px auto 0;
+  width:160px;
+  opacity:.9;
+}
+
+/* =========================
+   HEADER FINO
+========================= */
+#topbar{
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+
+/* =========================
+   FOOTER INSTITUCIONAL
+========================= */
+#eco{
+  position:fixed;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  opacity:.55;
+}.card h3{
+  margin-bottom:20px;
 }
